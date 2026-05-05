@@ -57,11 +57,11 @@ export const FOOTER_GROUPS: FooterLinkGroup[] = [
   {
     title: "Hire Developer Team",
     links: [
-      { label: "iOS Developer", href: "/contact" },
-      { label: "Android Developer", href: "/contact" },
-      { label: "Front-End Developer", href: "/contact" },
-      { label: "Back-End Developer", href: "/contact" },
-      { label: "Full-Stack Developer", href: "/contact" },
+      { label: "iOS Developer", href: "/hire/ios-developers" },
+      { label: "Android Developer", href: "/hire/android-developers" },
+      { label: "Front-End Developer", href: "/hire/front-end-developers" },
+      { label: "Back-End Developer", href: "/hire/back-end-developers" },
+      { label: "Full-Stack Developer", href: "/hire/full-stack-developers" },
     ],
   },
 ];
