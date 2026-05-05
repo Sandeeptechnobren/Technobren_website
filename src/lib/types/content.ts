@@ -2,6 +2,7 @@ export type NavItem = {
   label: string;
   href: string;
   cta?: boolean;
+  children?: { label: string; href: string }[];
 };
 
 export type FooterLinkGroup = {

@@ -5,6 +5,20 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Industry", href: "/industry" },
   { label: "Solutions", href: "/solutions" },
+  {
+    label: "Hire Developers",
+    href: "/contact",
+    children: [
+      { label: "Hire iOS Developers", href: "/contact" },
+      { label: "Hire Android Developers", href: "/contact" },
+      { label: "Hire Flutter Developers", href: "/contact" },
+      { label: "Hire React Native Developers", href: "/contact" },
+      { label: "Hire Front-End Developers", href: "/contact" },
+      { label: "Hire Back-End Developers", href: "/contact" },
+      { label: "Hire Full-Stack Developers", href: "/contact" },
+      { label: "Hire DevOps Engineers", href: "/contact" },
+    ],
+  },
   { label: "Contact Us", href: "/contact", cta: true },
 ];
 
