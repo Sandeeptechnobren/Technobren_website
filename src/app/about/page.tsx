@@ -77,7 +77,7 @@ export default function AboutPage() {
         <div className="container-page">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="flex justify-center lg:justify-start">
-              <img src="/images/ceo-img.svg" alt="" className="max-w-full h-auto rounded-2xl" />
+              <img src="/images/ceo-img.jpeg" alt="" className="max-w-full h-auto rounded-2xl" />
             </div>
             <div>
               <h3 className="devider-text">A Message from our CEO</h3>
