@@ -8,6 +8,7 @@ import { IndustriesCarousel } from "@/components/carousel/IndustriesCarousel";
 import { ClientsCarousel } from "@/components/carousel/ClientsCarousel";
 import { Reveal } from "@/components/shared/Reveal";
 import { Eyebrow } from "@/components/shared/Eyebrow";
+import { CountUp } from "@/components/shared/CountUp";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -15,11 +16,55 @@ export const metadata: Metadata = {
     "TechnoBren Infotech delivers next-gen software solutions: custom software, mobile apps, and tailored IT solutions powered by deep expertise.",
 };
 
-const HOME_STATS = [
-  { value: "100+", label: "Projects shipped" },
-  { value: "5+", label: "Years building software" },
-  { value: "24/7", label: "Engineering support" },
-  { value: "4", label: "Continents served" },
+type HomeStat =
+  | { kind: "count"; target: number; suffix?: string; label: string }
+  | { kind: "display"; display: string; label: string };
+
+const HOME_STATS: HomeStat[] = [
+  { kind: "count", target: 100, suffix: "+", label: "Projects shipped" },
+  { kind: "count", target: 5, suffix: "+", label: "Years building software" },
+  { kind: "display", display: "24/7", label: "Engineering support" },
+  { kind: "count", target: 4, label: "Continents served" },
+];
+
+const HOME_SERVICE_KEYWORDS = [
+  "AI Engineering",
+  "Cloud Infrastructure",
+  "Mobile Apps",
+  "Enterprise Software",
+  "Custom Development",
+  "DevOps & SRE",
+  "Security Engineering",
+  "Data & Analytics",
+  "UI / UX Design",
+  "QA Automation",
+];
+
+const HOME_FAQS = [
+  {
+    q: "How do you typically engage with new clients?",
+    a: "We start with a 30-minute discovery call (free, no-obligation) to understand your goals. Within 24 hours we send a written scoping plan covering scope, timeline, team shape, and price — then you decide if we're the right fit.",
+  },
+  {
+    q: "Do you work fixed-fee or time and materials?",
+    a: "Both. Fixed-fee suits well-defined scopes (a portal, a mobile app v1). T&M suits longer-running product work where requirements evolve. We'll recommend whichever fits your project after the discovery call.",
+  },
+  {
+    q: "Who actually writes the code? Do you outsource?",
+    a: "Our own engineers — average 8+ years of experience. We don't subcontract; you talk to the people building your product. Daily standups and weekly demos keep you in the loop.",
+  },
+  {
+    q: "Will I own the source code, infrastructure, and data?",
+    a: "Yes — completely. Source lives in your GitHub/GitLab, infra runs in your AWS/GCP/Azure account, and CI/CD is wired to your accounts on day one. No vendor lock-in, no proprietary platforms.",
+  },
+  {
+    q: "How do you handle security and compliance?",
+    a: "OWASP-aligned reviews on every release, automated secret scanning in CI, least-privilege IAM by default. We've shipped HIPAA-, GDPR-, and PCI-bound systems and can produce evidence packages on request.",
+  },
+  {
+    q: "What happens after the build is done?",
+    a: "A clean handover to your team (documentation, runbooks, knowledge transfer sessions) and an optional support retainer for hardening, observability, and minor enhancements. You're never locked in to keep us around.",
+  },
 ];
 
 const HOME_PROCESS = [
@@ -95,14 +140,28 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="hero-bg section-padding">
+      <section className="hero-bg section-padding relative">
+        <a href="#explore" className="hero-scroll-cue" aria-label="Scroll to explore">
+          <span>Scroll to explore</span>
+          <span className="hero-scroll-arrow" aria-hidden>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M6 9l6 6 6-6"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </a>
         <div className="container-page">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center lg:[&>*:first-child]:order-2">
             <Reveal className="flex justify-center lg:justify-end">
               <img
                 src="/images/home-info.svg"
                 alt=""
-                className="max-w-full h-auto drop-shadow-[0_25px_50px_rgba(167,35,41,0.15)]"
+                className="max-w-full h-auto drop-shadow-[0_25px_50px_rgba(167,35,41,0.15)] float-soft"
               />
             </Reveal>
             <div>
@@ -168,13 +227,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stat strip */}
+      {/* Service-keyword marquee — decorative, infinite scroll */}
+      <section
+        id="explore"
+        className="marquee-strip"
+        aria-label="Capabilities at a glance"
+      >
+        <div className="marquee-track">
+          {[...HOME_SERVICE_KEYWORDS, ...HOME_SERVICE_KEYWORDS].map((kw, i) => (
+            <span
+              key={i}
+              className="marquee-item"
+              aria-hidden={i >= HOME_SERVICE_KEYWORDS.length}
+            >
+              {kw}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Stat strip — animated counters */}
       <section className="stat-strip">
         <div className="container-page">
           <ul className="stat-grid">
             {HOME_STATS.map((s, i) => (
               <Reveal as="li" key={s.label} delay={i * 60} className="stat-item">
-                <span className="stat-value">{s.value}</span>
+                <span className="stat-value">
+                  {s.kind === "count" ? (
+                    <CountUp target={s.target} suffix={s.suffix ?? ""} />
+                  ) : (
+                    s.display
+                  )}
+                </span>
                 <span className="stat-label">{s.label}</span>
               </Reveal>
             ))}
@@ -478,6 +562,29 @@ export default function HomePage() {
       </section>
 
       <LocationCards />
+
+      {/* FAQ accordion */}
+      <section className="section-padding bg-surface-alt">
+        <div className="container-page">
+          <Reveal className="text-center mb-10">
+            <Eyebrow>Common Questions</Eyebrow>
+            <h2 className="section-title">Frequently asked, plainly answered</h2>
+            <p className="details-text center-details-text mt-4 text-lg">
+              Most teams ask the same six things before starting. Here&apos;s what we tell them — short, honest, no sales fluff.
+            </p>
+          </Reveal>
+          <div className="faq-grid">
+            {HOME_FAQS.map((f, i) => (
+              <Reveal key={f.q} delay={i * 50}>
+                <details className="faq-item">
+                  <summary className="faq-summary">{f.q}</summary>
+                  <div className="faq-body">{f.a}</div>
+                </details>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA banner */}
       <section className="section-padding">

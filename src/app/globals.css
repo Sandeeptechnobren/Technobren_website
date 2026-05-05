@@ -1129,4 +1129,170 @@ a {
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.6);
   }
+
+  /* Hero floating illustration — gentle vertical drift */
+  .float-soft {
+    animation: float-soft 7s ease-in-out infinite;
+  }
+  @keyframes float-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .float-soft { animation: none; }
+  }
+
+  /* Hero "scroll to explore" cue */
+  .hero-scroll-cue {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 600;
+    transition: color 0.2s ease;
+    z-index: 2;
+  }
+  .hero-scroll-cue:hover {
+    color: var(--color-primary);
+  }
+  .hero-scroll-arrow {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    animation: scroll-bounce 1.6s ease-in-out infinite;
+  }
+  .hero-scroll-cue:hover .hero-scroll-arrow {
+    border-color: var(--color-primary);
+  }
+  @keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.75; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-arrow { animation: none; }
+  }
+
+  /* Service-keyword marquee strip */
+  .marquee-strip {
+    background: var(--gradient-brand);
+    color: #fff;
+    padding: 18px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .marquee-strip::before,
+  .marquee-strip::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .marquee-strip::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(167, 35, 41, 0.95), transparent);
+  }
+  .marquee-strip::after {
+    right: 0;
+    background: linear-gradient(-90deg, rgba(99, 11, 15, 0.95), transparent);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-slide 40s linear infinite;
+  }
+  .marquee-strip:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding: 0 28px;
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .marquee-item::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+  }
+  @keyframes marquee-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+
+  /* FAQ accordion — native <details>/<summary> styled */
+  .faq-grid {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    transition: all 0.3s ease;
+  }
+  .faq-item[open] {
+    border-color: rgba(167, 35, 41, 0.3);
+    box-shadow: var(--shadow-card);
+  }
+  .faq-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 22px 26px;
+    font-weight: 600;
+    font-size: 17px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-summary::after {
+    content: "+";
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 300;
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+  .faq-item[open] .faq-summary::after {
+    transform: rotate(45deg);
+  }
+  .faq-body {
+    padding: 0 26px 22px;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 15px;
+    line-height: 1.6;
+  }
 }
