@@ -15,7 +15,7 @@ export const TEAM: TeamMember[] = [
   { name: "Ashish Yadav", role: "Backend Developer", photo: "/images/teamimg/Ashish.jpeg" },
   { name: "Devang Radadiya", role: "Frontend Developer", photo: "/images/teamimg/Devang.png" },
   { name: "Adarsh Chaubey", role: "Backend Developer", photo: "/images/teamimg/Adarsh.png" },
-  { name: "Vivek Yadav", role: "Backend Developer", photo: "/images/teamimg/Vivek.jpeg" },
+  { name: "Vivek Yadav", role: "Backend Developer", photo: "/images/teamimg/vivek.jpeg" },
   { name: "Aditya Maurya", role: "Python Developer", photo: "/images/teamimg/Aditya.jpeg" },
   { name: "Dayanand Dubey", role: "Frontend Developer", photo: "/images/teamimg/Daya.jpg" },
   { name: "Ujjwal Singh", role: "Backend Developer", photo: "/images/teamimg/ujjwal.png" },
