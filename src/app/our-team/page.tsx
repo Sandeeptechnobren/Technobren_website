@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { TEAM } from "@/lib/data/team";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Our Team",
@@ -19,10 +19,15 @@ export default function OurTeamPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {TEAM.map((m) => (
             <div key={m.name} className="team-boxes bg-surface-alt">
-              <img src={m.photo} alt={m.name} />
-              <h3 className="text-base">{m.name}</h3>
-              <p className="details-text mb-3">{m.role}</p>
-            </div>
+  <img
+    src={m.photo}
+    alt={m.name}
+    className="w-full h-[400px] object-cover rounded-lg"
+  />
+
+  <h3 className="text-base mt-3">{m.name}</h3>
+  <p className="details-text mb-3">{m.role}</p>
+</div>
           ))}
         </div>
       </div>
